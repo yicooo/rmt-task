@@ -28,6 +28,7 @@ API Specifications:
         - /showloginhistory, POST
 
 Code Structure:
+
     - nginx folder contains configuration and dockerfile for nginx container
     - app.py -> Flask file to handle requests.
     - config.py -> Configuration of flask-mongoengine
@@ -39,6 +40,7 @@ Code Structure:
     - docker-composem.yml -> Docker-Compose configurations
 
 Additional Notes: 
+
     - Tested on MacOS and Ubuntu
     - To test endpoints you can use:
         - 'examplerequest.sh' boilerplate script. In case of any problem about certification (not likely), you can use '--insecure' option.
@@ -47,6 +49,7 @@ Additional Notes:
     - Expected input syntax can be seen as comments in app.py
 
 You may question:
+
     - Log-in sessions which are stored in persistent memory does not have timeout, each log-in operation creates tokens to authenticate the user.
     - Timestamps are based on UTC +0 because why not.
     - In app.py, jsonify automatically returns status code 200, so for other status codes, they are wrapped with make_response method.
