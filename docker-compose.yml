@@ -1,0 +1,30 @@
+version: '3'
+    
+services:
+
+  db:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=main
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+      - ./data-db:/data/db
+    ports:
+      - '27017:27017'
+
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 app:app
+    volumes:
+      - .:/code
+    links:
+      - db
+    expose:
+      - 8000
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on: 
+     - web
